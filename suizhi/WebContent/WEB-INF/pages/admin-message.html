@@ -1,0 +1,358 @@
+<!doctype html>
+<html class="no-js  fixed-layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>广东穗智 | 后台管理</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+    <div class="am-topbar-brand">
+        <strong>广东穗智律师事务所</strong>
+        <small>后台管理系统</small>
+    </div>
+
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+            data-am-offcanvas="{target: '#admin-offcanvas'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span>
+    </button>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
+                    class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas" style="overflow-y: hidden">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="index.action"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>
+                        页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li><a href="company.action" class="am-cf"><span class="am-icon-check"></span> 公司概况</a></li>
+                        <li><a href="case.action"><span class="am-icon-puzzle-piece"></span> 穗智案例</a></li>
+                        <li><a href="team.action"><span class="am-icon-pencil-square-o"></span> 团队介绍</a></li>
+                        <li><a href="contact.action"><span class="am-icon-phone"></span> 联系我们</a></li>
+                    </ul>
+                </li>
+                <li><a href="message.action"><span class="am-icon-table"></span> 用户留言<span
+                        class="am-badge am-badge-secondary am-margin-right am-fr"></span></a></li>
+
+                <li><a href="../view/admin/logout.action"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>广东穗智律师事务所后台管理系统欢迎您</p>
+                </div>
+            </div>
+            <footer>
+                <hr>
+                <p class="am-padding-left">© 2016 广东穗智律师事务所</p>
+            </footer>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">用户留言</strong> /
+                <small>Users message</small>
+            </div>
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-sm-12 am-u-md-5">
+                <div class="am-form-group">
+                    <select data-am-selected="{btnSize: 'sm'}" id="classification">
+                        <option value="2">所有类别</option>
+                        <option value="0">未回复</option>
+                        <option value="1">已回复</option>
+                    </select>
+                </div>
+            </div>
+            <div class="am-u-sm-12 am-u-md-3">
+                <div class="am-input-group am-input-group-sm">
+                    <input type="text" class="am-form-field" id="find_content" placeholder="搜索号码">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-default" type="button" id="find">搜 索</button>
+          </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <tbody>
+                        <!--  <article class="am-comment"><a href="#link-to-user-home"><img
+                                            src="images/user.png" alt=""
+                                            class="am-comment-avatar" width="48" height="48"></a>
+                                        <div class="am-comment-main">
+                                            <header class="am-comment-hd">
+                                                <div class="am-comment-meta"><a href="#link-to-user" class="am-comment-author">${phone}</a> 留言于
+                                                    <time >${createtime}</time>
+                                                </div>
+                                                <div class="am-comment-actions" data-id="${id}"><a  class="reply" onclick="reply(this)"><i class="am-icon-pencil"></i></a>
+                                                <a class="delete" onclick="del(this)"><i class="am-icon-close"></i></a></div>
+                                            </header>
+                                            <div class="am-comment-bd"><p>
+                                               ${qusetion}</p>
+                                                <blockquote>${answer}</blockquote>
+                                            </div>
+                                        </div><br/>
+                                    </article>
+                                    -->
+                        </tbody>
+                    </table>
+                    <div class="am-text-center" id="tip">
+                        数据加载中<i class="am-icon-spinner am-icon-pulse"></i>
+                    </div>
+
+                    <!--回复弹窗-->
+                    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+                        <div class="am-modal-dialog">
+                            <div class="am-modal-hd">回复留言</div>
+                            <div class="am-modal-bd">
+                                <div id="content"></div>
+                                <textarea rows="3" class="am-modal-prompt-input" id="message_content"></textarea>
+                            </div>
+                            <div class="am-modal-footer">
+                                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--删除弹窗-->
+                    <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+                        <div class="am-modal-dialog">
+                            <div class="am-modal-hd">删除确认</div>
+                            <div class="am-modal-bd">
+                                你确定要删除这条留言吗？
+                            </div>
+                            <div class="am-modal-footer">
+                                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="am-cf">
+                        共<span id="record">0</span>条记录
+                        <div class="am-fr">
+                            <ul class="am-pagination" id="page">
+
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- content end -->
+</div>
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+<script>
+    var content = $("tbody").html().trim().substring(4).replace("-->", "");
+    var $that, json;
+
+    /*号码搜索*/
+    $("#find").click(function () {
+        var reg = /^[1-9]\d{10}$/;
+        if (reg.test($("#find_content").val())) {
+            console.log($("#find_content").val());
+            $("#find").html('搜索 <i class="am-icon-spinner am-icon-pulse"></i>');
+            ajax("view/admin/getContactsByStatus.action?pageNo=1&status=2&phone=" + $("#find_content").val(), "", appenMessage, error, "get");
+        }
+        else {
+            $("#find").html('格式错误');
+            $("#find").attr("class", "am-btn am-btn-danger");
+            setTimeout(function () {
+                $("#find").html("搜 索");
+                $("#find").attr("class", "am-btn am-btn-default");
+            }, 2000);
+        }
+    })
+
+    /*分类*/
+    $("#classification").change(function () {
+        var status = $("#classification").val();
+        ajax("view/admin/getContactsByStatus.action?pageNo=1&status=" + status + "&phone=" + $("#find_content").val(), "", appenMessage, error, "get");
+        console.log($("#classification").val());
+    })
+
+    //ajax封装
+    function ajax(url, data, success, error, type_) {
+        if (type_ == "") type_ = 'post';
+        $.ajax({
+            type: type_,
+            data: data,
+            url: "../" + url,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (d) {
+                success(d);
+            },
+            error: function (e) {
+                error(e);
+            }
+        });
+    }
+
+    /*ajax成功填充页面*/
+    function appenMessage(data) {
+        $("#find").html("搜 索");
+        var messages = data.messages;
+        $("tbody").html("");
+        for (var i = 0; i < messages.length; i++) {
+            $("tbody").append(appenContent(content, messages[i]));
+        }
+        $("#tip").html('');
+        if (messages.length == 0)
+            $("#tip").html('<i class="am-icon-warning">暂无数据');
+        $("#record").html(data.total);
+        page(data.page, data.pages);
+
+    }
+
+    function reply(that) {
+
+        $that = $(that);
+        $("#content").html($(that).parent().parent().parent().find("p").html());
+        $("#message_content").val($(that).parent().parent().parent().find("blockquote").html());
+        $('#my-prompt').modal({
+            relatedTarget: this,
+            onConfirm: function (e) {
+
+                //$(that).parent().parent().parent().find("blockquote").html( e.data || '');
+                ajax("view/admin/updataContactsById.action?id=" + $that.parent().attr("data-id") + "&answer=" + (e.data || ""), "", function () {
+                    console.info($that.parent().parent().parent().find("blockquote"));
+                    console.info(e.data || '');
+                    $that.parent().parent().parent().find("blockquote").html(e.data || '');
+                }, error, "get")
+            },
+            onCancel: function (e) {
+            }
+        });
+    }
+
+    function del(that) {
+
+        $that = $(that);
+        $('#my-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function (options) {
+                console.log($that.parent().attr("data-id"));
+                ajax("view/admin/deleteContactsById.action?id=" + $that.parent().attr("data-id"), "", function () {
+                    $that.parent().parent().parent().parent().remove();
+                    var total = $("#record").html();
+                    console.info(total);
+                    $("#record").html(total - 1);
+                }, error, "get")
+            },
+            onCancel: function () {
+            }
+        });
+
+    }
+
+    /*分页（最多显示9页）*/
+    function page(page, pages) {
+        $("#page").html("");
+        if (page > 5)$("#page").append('<li "><a class="page">«</a></li>');
+        var first_page = (page - 4 > 0) ? page - 4 : 1;
+        var lasy_page = (pages - 4 > page) ? page + 4 : pages;
+        for (var j = first_page; j < lasy_page + 1; j++) {
+            if (j == page) $("#page").append('<li class="am-active"><a class="page">' + j + '</a></li>');
+            else $("#page").append('<li><a class="page">' + j + '</a></li>');
+        }
+        if (page < pages - 4)$("#page").append('<li><a class="page">»</a></li>');
+
+        var to_page;
+        var status = $("#classification").val();
+        /*点击页面按钮*/
+        $(".page").click(function () {
+            to_page = $(this).html();
+            if (to_page == "«") {
+                to_page = parseInt(first_page) - 1;
+            } else if (to_page == "»") {
+                to_page = parseInt(lasy_page) + 1;
+            }
+            console.log(to_page);
+            ajax("view/admin/getContactsByStatus.action?pageNo=" + to_page + "&status=" + status + "&phone=" + $("#find_content").val(), "", appenMessage, error, "get");
+        })
+
+    }
+
+
+    function appenContent(content, data) {
+        for (var key in data) {
+            if (key == "createtime") {
+                console.info(data[key]);
+                data[key] = new Date(data[key]);
+                console.info(data[key].getMonth());
+                data[key] = data[key].getFullYear() + "-" + (data[key].getMonth() + 1) + "-" + data[key].getDate() + " " + data[key].getHours() + ":" + data[key].getMinutes();
+                console.info("--", data[key]);
+
+            }
+            content = content.replace("${" + key + "}", (data[key] == null) ? "" : data[key]);
+        }
+        return content;
+    }
+
+    function error(e) {
+        console.error(e);
+        alert("服务器错误！");
+        $("#tip").html('<i class="am-icon-close">获取数据失败，请刷新重试！');
+    }
+
+    console.info("view/admin/getContactsByStatus.action?pageNo=1&status=2&phone=" + $("#find_content").val());
+    var requsetUrl = "view/admin/getContactsByStatus.action?pageNo=1&status=2&phone=" + $("#find_content").val();
+    console.info(requsetUrl);
+    ajax(requsetUrl, "", appenMessage, error, "get");
+
+
+</script>
+</html>

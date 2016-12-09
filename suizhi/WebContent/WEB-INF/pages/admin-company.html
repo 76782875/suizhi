@@ -1,0 +1,350 @@
+<!doctype html>
+<html class="no-js ">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>广东穗智 | 后台管理</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+    <div class="am-topbar-brand">
+        <strong>广东穗智律师事务所</strong>
+        <small>后台管理系统</small>
+    </div>
+
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
+                    class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas" style="overflow-y: hidden">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="index.action"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>
+                        页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                      <li><a href="company.action" class="am-cf"><span class="am-icon-check"></span> 公司概况</a></li>
+                        <li><a href="case.action"><span class="am-icon-puzzle-piece"></span> 穗智案例</a></li>
+                        <li><a href="team.action"><span class="am-icon-pencil-square-o"></span> 团队介绍</a></li>
+                        <li><a href="contact.action"><span class="am-icon-phone"></span> 联系我们</a></li>
+                       </ul>
+                </li>
+                <li><a href="message.action"><span class="am-icon-table"></span> 用户留言<span
+                        class="am-badge am-badge-secondary am-margin-right am-fr"></span></a></li>
+
+                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>广东穗智律师事务所后台管理系统欢迎您</p>
+                </div>
+            </div>
+            <footer>
+                <hr>
+                <p class="am-padding-left">© 2016 广东穗智律师事务所</p>
+            </footer>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">公司概况</strong> /
+                <small>Company profile</small>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="am-g">
+            <!--确认弹窗-->
+            <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-hd">保存成功！</div>
+                    <div class="am-modal-bd">
+                    </div>
+                    <div class="am-modal-footer">
+                        <span class="am-modal-btn">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--修改简介-->
+        <div class="am-u-sm-12 am-u-md-12 am-u-md-push-0">
+            <form class="am-form am-form-horizontal" id="intro_form">
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-u-md-2 am-form-label">穗智宗旨<p class="am-hide-sm-only"> /
+                        purpose</p></label>
+                    <div class="am-u-sm-9 am-u-md-8">
+                        <textarea name="purpose" rows="8" id="purpose"></textarea>
+                    </div>
+                    <div class="am-hide-sm-only am-u-md-2 am-u-md-push-0">
+                        <button type="button" id="see1" class="am-btn am-btn-success am-radius">预览</button>
+                        <button type="button" id="clean1" class="am-btn am-btn-danger am-radius">清空</button>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-10 am-u-md-push-1" id="show1"></div>
+                <hr class="am-u-sm-12 am-u-md-12">
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-u-md-2 am-form-label">沿革<p class="am-hide-sm-only"> /
+                        history</p></label>
+                    <div class="am-u-sm-9 am-u-md-8">
+                        <textarea name="history" rows="8" id="history"></textarea>
+                    </div>
+                    <div class="am-hide-sm-only am-u-md-2 am-u-md-push-0">
+                        <button type="button" id="see2" class="am-btn am-btn-success am-radius">预览</button>
+                        <button type="button" id="clean2" class="am-btn am-btn-danger am-radius">清空</button>
+                    </div>
+                </div>
+
+                <div class="am-u-sm-12 am-u-md-10 am-u-md-push-1" id="show2"></div>
+                <hr class="am-u-sm-12 am-u-md-12">
+                <div class="am-form-group">
+                    <label class="am-hide-sm-only am-u-md-2 am-form-label">公司概要<p class="am-hide-sm-only"></p>
+                    </label>
+                    <div class="am-u-sm-12 am-u-md-8 am-u-lg-pull-2">
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="name" name="name" placeholder="名称">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">执业证号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="certificate" name="certificate" placeholder="执业证号">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">设立时间</label>
+                            <div class="am-u-sm-9">
+                                <input type="date" id="createtime"  name="createtime" placeholder="设立时间" >
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">办公地址</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="adress" name="adress" placeholder="办公地址">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">其他办事处地址</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="otherAdress" name="otherAdress" placeholder="其他办事处地址">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">工作时间</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="workTime" name="workTime" placeholder="工作时间">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">联系电话</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="phone" name="phone" placeholder="联系电话">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">专职律师</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="layer" name="layer" placeholder="专职律师">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <div class="am-u-sm-12 am-text-center">
+                        <button type="button" class="am-btn am-btn-primary"
+                                id="intro_upload">保存修改
+                        </button>
+                        <button type="reset" class="am-btn am-btn-primary">重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- content end -->
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="assets/js/nicEdit.js"></script>
+<script type="text/javascript">
+    var ab;
+    var cd;
+    bkLib.onDomLoaded(function () {
+        ab = new nicEditor().panelInstance('purpose');
+        cd = new nicEditor().panelInstance('history');
+    });
+</script>
+<script>
+
+    //ajax封装
+    function ajax(url, data, success, error, type) {
+        type = (type == null) ? "post" : type;
+        $.ajax({
+            type:type,
+            data: data,
+            url: url,
+            dataType: "json",
+            contentType: "application/json",
+            success: function (d) {
+                success(d);
+            },
+            error: function (e) {
+                error(e);
+            }
+        });
+    }
+
+    ajax("../view/admin/viewSummarize.action","",function(data){
+        for (var key in data.summarize) {
+            if(key == "purpose"){
+                ab.instanceById("purpose").setContent(data.summarize[key]);
+            }else if(key == "history"){
+                cd.instanceById("history").setContent(data.summarize[key]);
+            }else if (key == "createtime") {
+                data.summarize[key] = new Date(data.summarize[key]);
+                var seperator = "-";
+                var year = data.summarize[key].getFullYear();
+                var month = data.summarize[key].getMonth() + 1;
+                var strDate = data.summarize[key].getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                data.summarize[key] =  year + seperator + month + seperator + strDate;
+                $("#" + key).val((data.summarize[key] == null) ? "" : data.summarize[key]);
+            }else{
+                $("#" + key).val((data.summarize[key] == null) ? "" : data.summarize[key]);
+            }
+        }
+    },error,"get")
+
+    function error(e) {
+        console.error(e);
+        alert("服务器错误！");
+    }
+
+    $("#see1").click(function () {
+        $("#show1").html(ab.instanceById("purpose").getContent());
+    })
+    $("#see2").click(function () {
+        $("#show2").html(cd.instanceById("history").getContent());
+    })
+    $("#clean1").click(function () {
+        ab.instanceById("purpose").setContent("")
+    })
+    $("#clean2").click(function () {
+        cd.instanceById("history").setContent("")
+    })
+
+    //异步提交表单
+    $("#intro_upload").on("click", function () {
+        console.log($(this));
+        $("#purpose").val(ab.instanceById("purpose").getContent());
+        $("#history").val(cd.instanceById("history").getContent());
+
+        $("#intro_form").ajaxSubmit({
+            type: 'get',
+            url: '../view/admin/updateSummarize.action',
+            success: function (data) {
+                console.log(data);
+                  alert("提交成功！")
+            },
+            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                console.log(XmlHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+                alert("提交失败！");
+            }
+        });
+    });
+
+    //限制图片大小，类型，显示图片
+    $("#user-pic").change(function () {
+        if (!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test($("#user-pic").val()) && $("#user-pic").val() != "") {
+            $("#user-pic").val("");
+            alert("图片类型必须是.gif,jpeg,jpg,png中的一种!");
+            return false;
+        }
+        if (this.files[0].size > 1 * 1024 * 1024) {
+            $("#user-pic").val("");
+            alert("图片不能大于1M");
+        } else {
+            $("#show").attr("src", getObjectURL(this.files[0]));
+        }
+    })
+
+    //获取图片本地路径
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>
+</body>
+</html>

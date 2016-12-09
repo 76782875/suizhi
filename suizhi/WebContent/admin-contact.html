@@ -1,0 +1,296 @@
+<!doctype html>
+<html class="no-js  fixed-layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>广东穗智 | 后台管理</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+    以获得更好的体验！</p>
+<![endif]-->
+
+<header class="am-topbar admin-header">
+    <div class="am-topbar-brand">
+        <strong>广东穗智律师事务所</strong>
+        <small>后台管理系统</small>
+    </div>
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span
+                    class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas" style="overflow-y: hidden">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="index.action"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span>
+                        页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li><a href="company.action" class="am-cf"><span class="am-icon-check"></span> 公司概况</a></li>
+                        <li><a href="case.action"><span class="am-icon-puzzle-piece"></span> 经典案例</a></li>
+                        <li><a href="team.action"><span class="am-icon-pencil-square-o"></span> 团队介绍</a></li>
+                        <li><a href="contact.action"><span class="am-icon-phone"></span> 联系我们</a></li>
+                    </ul>
+                </li>
+                <li><a href="message.action"><span class="am-icon-table"></span> 用户留言<span
+                        class="am-badge am-badge-secondary am-margin-right am-fr"></span></a></li>
+
+                <li><a href="http://localhost:8080/suizhi/view/admin/logout.action"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>广东穗智律师事务所后台管理系统欢迎您</p>
+                </div>
+            </div>
+            <footer>
+                <hr>
+                <p class="am-padding-left">© 2016 广东穗智律师事务所</p>
+            </footer>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">联系我们</strong> /
+                <small>Contact Us</small>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <button type="button" class="am-btn am-btn-default edit" onclick="edit(this)"><span class="am-icon-plus"></span> 新增
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <thead>
+                        <tr>
+                            <th class="table-name">公司名称</th>
+                            <th class="table-address">地址</th>
+                            <th class="table-tel">电话</th>
+                            <th class="table-set">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--<tr>
+                          <td class="name">${name}</td>
+                          <td class="address">${address}</td>
+                          <td class="tel">${phone}</td>
+                          <td>
+                            <div class="am-btn-toolbar">
+                              <div class="am-btn-group am-btn-group-xs" data-id="${id}">
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary edit" type="button"  onclick="edit(this)"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger delete" type="button" onclick="del(this)"><span class="am-icon-trash-o" ></span> 删除</button>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>-->
+                        </tbody>
+                    </table>
+                    <div class="am-text-center" id="tip">
+                        数据加载中<i class="am-icon-spinner am-icon-pulse"></i>
+                    </div>
+
+                    <!--回复弹窗-->
+                    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+                        <div class="am-modal-dialog">
+                            <div class="am-modal-hd">联系我们</div>
+                            <div class="am-modal-bd">
+                                <div id="content"></div>
+                                <input class="am-modal-prompt-input" id="name" placeholder="请输入公司名称"/>
+                                <input class="am-modal-prompt-input" id="address" placeholder="请输入公司地址"/>
+                                <input class="am-modal-prompt-input" id="tel" placeholder="请输入电话号码"/>
+                            </div>
+                            <div class="am-modal-footer">
+                                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--删除弹窗-->
+                    <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+                        <div class="am-modal-dialog">
+                            <div class="am-modal-hd">删除确认</div>
+                            <div class="am-modal-bd">
+                                你确定要删除吗？
+                            </div>
+                            <div class="am-modal-footer">
+                                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- content end -->
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+<script>
+    var content = $("tbody").html().trim().substring(4).replace("-->", "");
+    var $that,json;
+
+    //ajax封装
+    function ajax(url, data, success, error, data_type) {
+        data_type = (data_type == null) ? "json" : data_type;
+        $.ajax({
+            type: 'post',
+            data: data,
+            url: url,
+            dataType: data_type,
+            contentType: "application/json",
+            success: function (d) {
+                success(d);
+            },
+            error: function (e) {
+                error(e);
+            }
+        });
+    }
+
+    /*ajax成功填充页面*/
+    function appenMessage(data) {
+        $("tbody").html("");
+        for (var i = 0; i < data.contact.length; i++) {
+            $("tbody").append(appenContent(content, data.contact[i]));
+        }
+        if (data.contact.length == 0)
+            $("#tip").html('<i class="am-icon-warning">暂无数据');
+        else {
+            $("#tip").html('<i class="am-icon-check">加载完成');
+            $("#tip").fadeOut(2000);
+        }
+    }
+
+    //新增或编辑
+    function edit(that){
+        if ($(that).parent().attr("data-id") != null) {
+            $("#name").val($(that).parent().parent().parent().parent().find(".name").html());
+            $("#address").val($(that).parent().parent().parent().parent().find(".address").html());
+            $("#tel").val($(that).parent().parent().parent().parent().find(".tel").html());
+        } else {
+            $("#name").val("");
+            $("#address").val("");
+            $("#tel").val("");
+        }
+        $that = $(that);
+        $('#my-prompt').modal({
+            relatedTarget: this,
+            onConfirm: function (e) {
+                if ($that.parent().attr("data-id") != null) {/* 不为空就是编辑按钮的实现 */
+                    console.log("修改id为" + $that.parent().attr("data-id") + "的值为 " + e.data);//在控制台打印数据的调试语句
+                    ajax("../view/admin/contactUsUpdate.action?id=" + $that.parent().attr("data-id")
+                            + "&name=" + $("#name").val() + "&address=" + $("#address").val() + "&phone=" + $("#tel").val(), "", function () {
+
+                        $that.parent().parent().parent().parent().find(".name").html(e.data[0]);
+                        $that.parent().parent().parent().parent().find(".address").html(e.data[1]);
+                        $that.parent().parent().parent().parent().find(".tel").html(e.data[2]);
+
+                    }, error);
+
+                } else {
+                    console.log("新增的数据是：" + e.data);
+                    ajax("../view/admin/contactUsAdd.action?name=" + $("#name").val() + "&address=" + $("#address").val() + "&phone=" + $("#tel").val(), "", function (data) {
+                        json = JSON.parse(JSON.stringify({
+                            "id": data.id,
+                            "name": e.data[0],
+                            "address": e.data[1],
+                            "phone": e.data[2]
+                        }))
+                        console.log(json);
+                        $("tbody").append(appenContent(content, json));
+                    }, error);
+                }
+            },
+            onCancel: function (e) {
+            }
+        });
+    }
+
+    //删除
+    function del(that){
+        $that = $(that);
+        $('#my-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function (options) {
+                console.log("给后台传的提示删除位置的id是：" + $that.parent().attr("data-id"));
+                ajax("../view/admin/contactUsDelete.action?id=" + $that.parent().attr("data-id"), "", function () {
+                    $that.parent().parent().parent().parent().remove();
+                }, error, "text");
+
+            },
+            onCancel: function () {
+            }
+        });
+    }
+
+    function appenContent(content, data) {
+        for (var key in data) {
+            content = content.replace("${" + key + "}", data[key]);
+        }
+        return content;
+    }
+
+
+    function error(e) {
+        console.error(e);
+        alert("服务器错误！");
+    }
+
+
+    ajax("../view/admin/index.action", "", appenMessage, error);
+
+</script>
+</html>

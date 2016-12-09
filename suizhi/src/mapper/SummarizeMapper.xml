@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.SummarizeMapper" >
+  <resultMap id="BaseResultMap" type="model.pojo.Summarize" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="en_name" property="enName" jdbcType="VARCHAR" />
+    <result column="certificate" property="certificate" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="DATE" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="other_adress" property="otherAdress" jdbcType="VARCHAR" />
+    <result column="work_time" property="workTime" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+    <result column="layer" property="layer" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="model.pojo.Summarize" extends="BaseResultMap" >
+    <result column="purpose" property="purpose" jdbcType="LONGVARCHAR" />
+    <result column="history" property="history" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, en_name, certificate, createtime, adress, other_adress, work_time, phone, 
+    site, layer
+  </sql>
+  <sql id="Blob_Column_List" >
+    purpose, history
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="model.pojo.SummarizeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="model.pojo.SummarizeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from summarize
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from summarize
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="model.pojo.SummarizeExample" >
+    delete from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="model.pojo.Summarize" useGeneratedKeys="true" keyProperty="id" >
+    insert into summarize (id, name, en_name, 
+      certificate, createtime, adress, 
+      other_adress, work_time, phone, 
+      site, layer, purpose, 
+      history)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{enName,jdbcType=VARCHAR}, 
+      #{certificate,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{adress,jdbcType=VARCHAR}, 
+      #{otherAdress,jdbcType=VARCHAR}, #{workTime,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{site,jdbcType=VARCHAR}, #{layer,jdbcType=VARCHAR}, #{purpose,jdbcType=LONGVARCHAR}, 
+      #{history,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.pojo.Summarize" useGeneratedKeys="true" keyProperty="id" >
+    insert into summarize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="enName != null" >
+        en_name,
+      </if>
+      <if test="certificate != null" >
+        certificate,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="adress != null" >
+        adress,
+      </if>
+      <if test="otherAdress != null" >
+        other_adress,
+      </if>
+      <if test="workTime != null" >
+        work_time,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+      <if test="layer != null" >
+        layer,
+      </if>
+      <if test="purpose != null" >
+        purpose,
+      </if>
+      <if test="history != null" >
+        history,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="otherAdress != null" >
+        #{otherAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null" >
+        #{layer,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        #{purpose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="history != null" >
+        #{history,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="model.pojo.SummarizeExample" resultType="java.lang.Integer" >
+    select count(*) from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update summarize
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enName != null" >
+        en_name = #{record.enName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificate != null" >
+        certificate = #{record.certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.adress != null" >
+        adress = #{record.adress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherAdress != null" >
+        other_adress = #{record.otherAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTime != null" >
+        work_time = #{record.workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null" >
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.layer != null" >
+        layer = #{record.layer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purpose != null" >
+        purpose = #{record.purpose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.history != null" >
+        history = #{record.history,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update summarize
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      certificate = #{record.certificate,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=DATE},
+      adress = #{record.adress,jdbcType=VARCHAR},
+      other_adress = #{record.otherAdress,jdbcType=VARCHAR},
+      work_time = #{record.workTime,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      layer = #{record.layer,jdbcType=VARCHAR},
+      purpose = #{record.purpose,jdbcType=LONGVARCHAR},
+      history = #{record.history,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update summarize
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      en_name = #{record.enName,jdbcType=VARCHAR},
+      certificate = #{record.certificate,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=DATE},
+      adress = #{record.adress,jdbcType=VARCHAR},
+      other_adress = #{record.otherAdress,jdbcType=VARCHAR},
+      work_time = #{record.workTime,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      layer = #{record.layer,jdbcType=VARCHAR}      ,purpose = #{record.purpose,jdbcType=LONGVARCHAR},
+      history = #{record.history,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="model.pojo.Summarize" >
+    update summarize
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enName != null" >
+        en_name = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="otherAdress != null" >
+        other_adress = #{otherAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        work_time = #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null" >
+        layer = #{layer,jdbcType=VARCHAR},
+      </if>
+      <if test="purpose != null" >
+        purpose = #{purpose,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="history != null" >
+        history = #{history,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="model.pojo.Summarize" >
+    update summarize
+    set name = #{name,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      adress = #{adress,jdbcType=VARCHAR},
+      other_adress = #{otherAdress,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      layer = #{layer,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=LONGVARCHAR},
+      history = #{history,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.pojo.Summarize" >
+    update summarize
+    set name = #{name,jdbcType=VARCHAR},
+      en_name = #{enName,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=DATE},
+      adress = #{adress,jdbcType=VARCHAR},
+      other_adress = #{otherAdress,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      layer = #{layer,jdbcType=VARCHAR}  ,    purpose = #{purpose,jdbcType=LONGVARCHAR},
+      history = #{history,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="ResultMapWithBLOBs" parameterType="model.pojo.SummarizeExample" id="selectByExampleWithBLOBsWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select resultMap="BaseResultMap" parameterType="model.pojo.SummarizeExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from summarize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

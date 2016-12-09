@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ContactUsMapperCustom">
+  	<!-- 定义联系方式查询的sql片段，就是联系方式的查询条件 -->
+  	<sql id="query_contactUs_where">
+  		<!-- 使用动态sql，通过if判断，满足条件进行sql拼接 -->
+  		<!-- 联系方式查询条件通过ContactUsQueryVo包装对象中的contactUsCustom属性传递 -->
+  		<if test="contactUsCustom!=null">
+  			<if test="contactUsCustom.name!=null and contactUsCustom.name!=''">
+  				contact_us.name LIKE '%${contactUsCustom.name}%'
+  			</if>
+  		</if>
+  	</sql>
+  	
+  	<!-- 联系方式列表查询 -->
+  	<select id="findContactUsList" parameterType="model.pojo.ContactUsQueryVo"
+  	resultType="mapper.ContactUsMapperCustom">
+  		SELECT contact_us.*	FROM contact_us 
+  		<where>
+  			<include refid="query_contactUs_where"></include>
+  		</where>
+  	</select>
+</mapper>

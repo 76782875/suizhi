@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>广东穗智 | 后台登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!-- <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">-->
+    <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+    <link rel="shortcut icon" href=" images/logo.ico"/>
+    <style>
+        .header {
+            text-align: center;
+        }
+
+        .am-g img {
+            width: 20%;
+            min-width: 200px;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="am-g">
+        <img src="images/logo.jpg">
+    </div>
+
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+        <hr/>
+        <form method="post" class="am-form">
+            <label for="account">账号:</label>
+            <input type="text" name="username" id="account" value="" placeholder="输入你的账号">
+            <br>
+            <label for="password">密码:</label>
+            <input type="password" name="password" id="password" value="" placeholder="输入你的密码">
+            <br/>
+            <br>
+            <div class="am-cf">
+                <button type="submit" name="" class="am-btn am-btn-primary am-btn-lg am-fl am-btn-block" id="submit">
+                    登录
+                </button>
+            </div>
+        </form>
+        <hr>
+    </div>
+</div>
+<footer>
+    <p>© 2016 广东穗智律师事务所</p>
+</footer>
+
+<script src="assets/js/jquery.min.js"></script>
+<script>
+    $("form").submit(function () {
+        if ($("#account").val() != "" && $("#password").val() != "") {
+            ajax("view/admin/login.action", JSON.stringify({
+                "username": $("#account").val(),
+                "password": $("#password").val()
+            }), login, error);
+            $("#submit").html('登录 <i class="am-icon-spinner am-icon-pulse"></i>');
+        }
+        else {
+            $("#submit").html('<i class="am-icon-times"></i> 账号&密码不能为空！');
+            $("#submit").attr("class", "am-btn am-btn-lg am-fl am-btn-block am-btn-danger");
+            setTimeout(function () {
+                $("#submit").html("登 录");
+                $("#submit").attr("class", "am-btn am-btn-primary am-btn-lg am-fl am-btn-block");
+            }, 3000);
+        }
+        return false;
+    })
+    //ajax封装
+    function ajax(url, data, success, error) {
+        $.ajax({
+            type: 'post',
+            data: data,
+            url: url,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (d) {
+                success(d);
+            },
+            error: function (e) {
+                error(e);
+            }
+        });
+    }
+    function login(data) {
+        console.info(data.message);
+        if (data.message=="fail") {
+            $("#submit").html('<i class="am-icon-times"></i> 账号或密码错误！');
+            $("#submit").attr("class", "am-btn am-btn-lg am-fl am-btn-block am-btn-danger");
+            setTimeout(function () {
+                $("#submit").html("登 录");
+                $("#submit").attr("class", "am-btn am-btn-primary am-btn-lg am-fl am-btn-block");
+            }, 3000);
+        } else {
+            sessionStorage.username=data.message;
+            location.href = "pages/index.action";
+        }
+    }
+
+    function error(e) {
+        console.error(e);
+        alert("服务器错误！");
+    }
+</script>
+</body>
+</html>

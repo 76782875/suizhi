@@ -1,0 +1,12 @@
+/SqlMapConfig.xml
+/config.properties
+/controller/
+/db.properties
+/gen/
+/log4j.properties
+/mapper/
+/model/
+/service/
+/spring/
+/test/
+/util/
